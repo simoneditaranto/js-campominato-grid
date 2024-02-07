@@ -25,6 +25,17 @@ buttonStartElement.addEventListener("click",
             const newElement = document.createElement("div");
             newElement.classList.add("square");
             newElement.innerText = i + 1;
+
+            newElement.addEventListener("click", 
+                function() {
+
+                    // al click aggiungo la classe .active (che colora di azzurrino la cella)
+                    this.classList.toggle("active");
+                    // al click stampo il contenuto del mio elemento
+                    console.log(this.innerText);
+
+                }
+            )
         
             gridElement.append(newElement);
         
