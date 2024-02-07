@@ -24,8 +24,11 @@ buttonStartElement.addEventListener("click",
     function() {
         // memorizzo l'elemento griglia ("grid") 
         const gridElement = document.querySelector("#grid");
+
         // ad ogni pressione del button, il contenuto della griglia si deve azzerare
         gridElement.innerHTML = "";
+        // ad ogni pressione del button, svuoto il contenuto della console
+        console.clear();
 
 
         // in base alla scelta dell'utente decido quante celle devo visualizzare in pagina
@@ -52,8 +55,10 @@ buttonStartElement.addEventListener("click",
         }
 
         // prendiamo la griglia 
-        // utilizzando un ciclo for, per ogni iterazione creiamo una cella nella griglia e inseriamo come testo
-        // l'indice dell'iterazione attuale 
+        // utilizzando un ciclo for, per ogni iterazione creiamo una cella nella griglia
+
+        // creo poi un array di numeri casuali di lunghezza "userDifficulty" e ad ogni iterazione del ciclo qui sotto inserisco ad ogni cella come numero l'i-esimo elemento dell'array
+        const randomNumbersArray = getRandomNumbersArrys(userDifficulty);
 
         // creazione griglia "userDifficulty" x "userDifficulty"
         for(let i = 0; i < userDifficulty; i++) {
@@ -61,7 +66,7 @@ buttonStartElement.addEventListener("click",
             // creiamo l'elemtno
             const newElement = document.createElement("div");
             newElement.classList.add("square");
-            newElement.innerText = i + 1;
+            newElement.innerText = randomNumbersArray[i];
 
             newElement.addEventListener("click", 
                 function() {
@@ -82,3 +87,38 @@ buttonStartElement.addEventListener("click",
 )
 
 
+/* ___________________________________________________________________________ */
+// FUNZIONI
+
+// funzione per generare un numero casuale da 1 a "maxNumber"
+function generateRandomNumber(maxNumber) {
+
+    return Math.floor(Math.random() * maxNumber + 1);
+
+}
+
+// funzione per generare un array di "arrayLenght" numeri casuali e diversi tra loro
+function getRandomNumbersArrys(arrayLenght) {
+
+    // inizializzo un array vuoto
+    const numbersArray = [];
+
+    while(numbersArray.length < arrayLenght) {
+
+        // genero un numero casuale
+        const newNumber = generateRandomNumber(arrayLenght);
+
+        // controllo se il numero è già presente nell'array
+        if(!numbersArray.includes(newNumber)) {
+
+            // se non lo include, lo aggiungo
+            numbersArray.push(newNumber);
+
+        }
+
+    }
+
+    // ritorno il mio array
+    return numbersArray;
+
+}
